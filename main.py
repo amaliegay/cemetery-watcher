@@ -3,9 +3,9 @@ from os import listdir
 from os.path import isfile, join
 import random
 import math
-import numpy as np 
+import numpy as np
 
-# import pygame module 
+# import pygame module
 import pygame
 
 pygame.init()
@@ -14,29 +14,30 @@ pygame.init()
 WIDTH, HEIGHT = 600, 600
 SCREEN_SIZE = [WIDTH, HEIGHT]
 
-# setting the size of the window 
+# setting the size of the window
 window = pygame.display.set_mode(SCREEN_SIZE)
 
 # store the color
 WHITE = (255, 255, 255)
 BG_COLOR = WHITE
 
-# set caption of screen 
-pygame.display.set_caption("SHOOTER")
+# set caption of screen
+pygame.display.set_caption("Cemetery Watcher")
 
 FPS = 60
+
 
 class Actor(pygame.sprite.Sprite):
     COLOR = (255, 0, 0)
 
     def __init__(self, x, y, width, height):
         self.bounding_box = pygame.Rect(x, y, width, height)
-        self.velocity = np.array([0,0]) 
+        self.velocity = np.array([0, 0])
 
 
 def draw(window, background):
     # draw the background image
-    window.bilt(background, (0,0))
+    window.blit(background, (0, 0))
     pygame.display.update()
 
 
@@ -60,7 +61,7 @@ def main(window):
                 run = False
                 break
 
-        draw(background)
+        draw(window, background)
 
     pygame.quit()
     quit()
