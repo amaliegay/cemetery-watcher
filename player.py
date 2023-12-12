@@ -3,21 +3,58 @@ from os.path import isfile, join
 
 import pygame
 from settings import *
+from utils import *
 
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, position, group):
         super().__init__(group)
 
+        self.import_assets()
+        self.status = "down_idle"
+        self.frame_index = 0
+
         # general setup
-        self.image = pygame.Surface((32, 64))
-        self.image.fill("green")
+        self.image = self.animations[self.status][self.frame_index]
         self.rect = self.image.get_rect(center=position)
 
         # movement attributes
         self.direction = pygame.math.Vector2()
         self.position = pygame.math.Vector2(self.rect.center)
         self.speed = 200
+
+    def import_assets(self):
+        print("import_assets")
+        self.animations = {
+            # "up": [],
+            # "down": [],
+            # "left": [],
+            # "right": [],
+            # "up_idle": [],
+            "down_idle": [],
+            # "left_idle": [],
+            # "right_idle": [],
+            # "up_sledgehammer": [],
+            # "down_sledgehammer": [],
+            # "left_sledgehammer": [],
+            # "right_sledgehammer": [],
+            # "up_knife": [],
+            # "down_knife": [],
+            # "left_knife": [],
+            # "right_knife": [],
+            # "up_revolver": [],
+            # "down_revolver": [],
+            # "left_revolver": [],
+            # "right_revolver": [],
+        }
+
+        for animation in self.animations.keys():
+            full_path = "assets/npc/" + animation
+            self.animations[animation] = import_folder(full_path)
+
+    def animate(self, deltaTime):
+        self.frame_index += 4 * deltaTime
+        self.image = self.animations[self.status][self.frame_index]
 
     def input(self):
         keys = pygame.key.get_pressed()
