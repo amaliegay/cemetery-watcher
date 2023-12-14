@@ -5,6 +5,7 @@ import pygame
 from settings import *
 from utils import *
 from animations import *
+from timer import Timer
 
 
 class Player(pygame.sprite.Sprite):
@@ -23,6 +24,15 @@ class Player(pygame.sprite.Sprite):
         self.direction = pygame.math.Vector2()
         self.position = pygame.math.Vector2(self.rect.center)
         self.speed = 200
+
+        # timers
+        self.timers = {"tool use": Timer(duration=350, callback=self.use_tool)}
+
+        # equipments
+        self.equipped_tool = "hoe"
+
+    def use_tool(self):
+        print("use_tool")
 
     def import_assets(self):
         print("import_assets")
@@ -59,35 +69,60 @@ class Player(pygame.sprite.Sprite):
     def input(self):
         keys = pygame.key.get_pressed()
 
-        if keys[pygame.K_UP]:
-            print("keyDown (scanCode = keyUp)")
-            self.direction.y = -1
-        elif keys[pygame.K_w]:
-            print("keyDown (scanCode = w)")
-            self.direction.y = -1
-        elif keys[pygame.K_DOWN]:
-            print("keyDown (scanCode = keyDown)")
-            self.direction.y = 1
-        elif keys[pygame.K_s]:
-            print("keyDown (scanCode = s)")
-            self.direction.y = 1
-        else:
-            self.direction.y = 0
+        if not self.timers["tool use"].active:
+            # directions
+            if keys[pygame.K_UP]:
+                print("keyDown (scanCode = keyUp)")
+                self.direction.y = -1
+                self.status = "up"
+            elif keys[pygame.K_w]:
+                print("keyDown (scanCode = w)")
+                self.direction.y = -1
+                self.status = "up"
+            elif keys[pygame.K_DOWN]:
+                print("keyDown (scanCode = keyDown)")
+                self.direction.y = 1
+                self.status = "down"
+            elif keys[pygame.K_s]:
+                print("keyDown (scanCode = s)")
+                self.direction.y = 1
+                self.status = "down"
+            else:
+                self.direction.y = 0
 
-        if keys[pygame.K_LEFT]:
-            print("keyDown (scanCode = keyLeft)")
-            self.direction.x = -1
-        elif keys[pygame.K_a]:
-            print("keyDown (scanCode = a)")
-            self.direction.x = -1
-        elif keys[pygame.K_RIGHT]:
-            print("keyDown (scanCode = keyRight)")
-            self.direction.x = 1
-        elif keys[pygame.K_d]:
-            print("keyDown (scanCode = d)")
-            self.direction.x = 1
-        else:
-            self.direction.x = 0
+            if keys[pygame.K_LEFT]:
+                print("keyDown (scanCode = keyLeft)")
+                self.direction.x = -1
+                self.status = "left"
+            elif keys[pygame.K_a]:
+                print("keyDown (scanCode = a)")
+                self.direction.x = -1
+                self.status = "left"
+            elif keys[pygame.K_RIGHT]:
+                print("keyDown (scanCode = keyRight)")
+                self.direction.x = 1
+                self.status = "right"
+            elif keys[pygame.K_d]:
+                print("keyDown (scanCode = d)")
+                self.direction.x = 1
+                self.status = "right"
+            else:
+                self.direction.x = 0
+
+            # equip
+            if keys[pygame.K_TAB]:
+                self.timers["tool use"].start()
+                self.direction = pygame.math.Vector2()
+                self.frame_index = 0
+
+    def get_status(self):
+        # idle
+        if self.direction.magnitude() == 0:
+            self.status = self.status.split("_")[0] + "_idle"
+
+        # tool use
+        if self.timers["tool use"].active:
+            self.status = self.status.split("_")[0] + "_" + self.equipped_tool
 
     def move(self, deltaTime):
         # normalize the direction vector
@@ -102,7 +137,13 @@ class Player(pygame.sprite.Sprite):
         self.position.y += self.speed * self.direction.y * deltaTime
         self.rect.centery = self.position.y
 
+    def update_timer(self):
+        for timer in self.timers.values():
+            timer.update()
+
     def update(self, deltaTime):
         self.input()
+        self.get_status()
+        self.update_timer()
         self.move(deltaTime)
         self.animate(deltaTime)
