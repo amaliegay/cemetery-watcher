@@ -4,6 +4,7 @@ from os.path import isfile, join
 import pygame
 from settings import *
 from utils import *
+from animations import *
 
 
 class Player(pygame.sprite.Sprite):
@@ -25,36 +26,35 @@ class Player(pygame.sprite.Sprite):
 
     def import_assets(self):
         print("import_assets")
-        self.animations = {
-            # "up": [],
-            # "down": [],
-            # "left": [],
-            # "right": [],
-            # "up_idle": [],
-            "down_idle": [],
-            # "left_idle": [],
-            # "right_idle": [],
-            # "up_sledgehammer": [],
-            # "down_sledgehammer": [],
-            # "left_sledgehammer": [],
-            # "right_sledgehammer": [],
-            # "up_knife": [],
-            # "down_knife": [],
-            # "left_knife": [],
-            # "right_knife": [],
-            # "up_revolver": [],
-            # "down_revolver": [],
-            # "left_revolver": [],
-            # "right_revolver": [],
-        }
+        self.animations = animations
 
-        for animation in self.animations.keys():
-            full_path = "assets/npc/" + animation
-            self.animations[animation] = import_folder(full_path)
+        for animation in animations.keys():
+            surface_list = []
+            for frame in animations[animation]:
+                full_path = "assets/Characters/" + frame["image"]
+
+                sprite_sheet = pygame.image.load(full_path).convert_alpha()
+                surface = pygame.Surface(
+                    (frame["size"]["width"], frame["size"]["height"]),
+                    pygame.SRCALPHA,
+                    32,
+                )
+                selected = pygame.Rect(
+                    frame["starting_position"]["x"],
+                    frame["starting_position"]["y"],
+                    frame["size"]["width"],
+                    frame["size"]["height"],
+                )
+                surface.blit(sprite_sheet, (0, 0), selected)
+                surface_list.append(pygame.transform.scale_by(surface, SCALE))
+
+            self.animations[animation] = surface_list
 
     def animate(self, deltaTime):
         self.frame_index += 4 * deltaTime
-        self.image = self.animations[self.status][self.frame_index]
+        if self.frame_index >= len(self.animations[self.status]):
+            self.frame_index = 0
+        self.image = self.animations[self.status][int(self.frame_index)]
 
     def input(self):
         keys = pygame.key.get_pressed()
@@ -105,29 +105,4 @@ class Player(pygame.sprite.Sprite):
     def update(self, deltaTime):
         self.input()
         self.move(deltaTime)
-
-
-def load_sprite_sheets(dir1, dir2, width, height):
-    path = join("assets", dir1, dir2)
-    images = [f for f in listdir(path) if isfile(join(path, f))]
-
-    all_sprites = {}
-
-    for image in images:
-        sprite_sheet = pygame.image.load(join(path, image)).convert_alpha()
-
-        sprites = []
-        for i in range(sprite_sheet.get_width() // width):
-            surface = pygame.Surface((width, height), pygame.SRCALPHA, 32)
-            rect = pygame.Rect(i * width, 0, width, height)
-            surface.blit(sprite_sheet, (0, 0), rect)
-            sprites.append(pygame.transform.scale2x(surface))
-
-
-class Actor(pygame.sprite.Sprite):
-    def __init__(self, x, y, width, height, id):
-        self.sprites = load_sprite_sheets("Actors", id, width, height)
-
-    def draw(self, win):
-        self.sprite = self.sprites["idle"][0]
-        win.blit(self.sprite, (self.bounding_box.x, self.bounding_box.y))
+        self.animate(deltaTime)
