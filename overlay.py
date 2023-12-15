@@ -13,13 +13,13 @@ class Overlay:
         self.player = player
 
         # imports
-        self.tools_surface = []
+        self.tools_surface = {}
         for tool_id in tools.keys():
             self.tools_surface[tool_id] = import_asset(
                 "assets/Objects/", tools[tool_id]
             )
 
-        self.spells_surface = []
+        self.spells_surface = {}
         for spell_id in spells.keys():
             self.spells_surface[spell_id] = import_asset(
                 "assets/Objects/", spells[spell_id]

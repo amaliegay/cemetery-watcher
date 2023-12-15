@@ -38,7 +38,7 @@ class Level:
 class CameraGroup(pygame.sprite.Group):
     def __init__(self):
         super().__init__()
-        self.display_surface = pygame.display_surface.get_surface()
+        self.display_surface = pygame.display.get_surface()
         self.offset = pygame.math.Vector2()
 
     def custom_draw(self, player):

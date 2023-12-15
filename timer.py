@@ -11,11 +11,11 @@ class Timer:
     def start(self):
         self.active = True
         self.start_time = pygame.time.get_ticks()
-        
+
     def cancel(self):
         self.active = False
         self.start_time = 0
-    
+
     def update(self):
         current_time = pygame.time.get_ticks()
         if current_time - self.start_time >= self.duration:

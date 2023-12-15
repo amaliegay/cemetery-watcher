@@ -28,9 +28,9 @@ class Player(pygame.sprite.Sprite):
 
         # timers
         self.timers = {
-            "tool_use": Timer(duration=200, callback=self.use_tool),
-            "tool_switch": Timer(duration=200)
-            "spell_switch": Timer(duration=200)
+            "tool_use": Timer(duration=350, callback=self.use_tool),
+            "tool_switch": Timer(duration=200),
+            "spell_switch": Timer(duration=200),
         }
 
         # inventory
@@ -42,21 +42,26 @@ class Player(pygame.sprite.Sprite):
         self.spells = ["corn", "tomato"]
         self.readied_spell_index = 0
         self.readied_spell = self.spells[self.readied_spell_index]
-        
 
     def use_tool(self):
         print("use_tool")
 
-    def change_tool(self):
+    def change_tool(self, direction):
         self.timers["tool_switch"].start()
-        self.readied_tool_index += 1
-        self.readied_tool_index = self.readied_tool_index if self.readied_tool_index < len(self.inventory) else 0
+        if direction == "up":
+            self.readied_tool_index -= 1
+        elif direction == "down":
+            self.readied_tool_index += 1
+        self.readied_tool_index = self.readied_tool_index % len(self.inventory)
         self.readied_tool = self.inventory[self.readied_tool_index]
 
-    def change_spell(self):
+    def change_spell(self, direction):
         self.timers["spell_switch"].start()
-        self.readied_spell_index += 1
-        self.readied_spell_index = self.readied_spell_index if self.readied_spell_index < len(self.spells) else 0
+        if direction == "up":
+            self.readied_spell_index -= 1
+        elif direction == "down":
+            self.readied_spell_index += 1
+        self.readied_spell_index = self.readied_spell_index % len(self.spells)
         self.readied_spell = self.spells[self.readied_spell_index]
 
     def import_assets(self):
