@@ -1,0 +1,9 @@
+"Zoe": "Hello? Mr Wong? We are the newly hired night shift watchers. I'm Zoe."
+Zoe looks to you. You realize she is waiting for your name.
+"Player": "My name is Raphaël Ambrosius Costeau."
+An old man with a thin, unimpressive beard, opens the gate and stares at you.
+"Wong": "The harbinger of doom."
+"Zoe": "What?"
+"Wong": "Don't let the zombies break through the gate."
+He locks the gate from the outside and leaves the two of you inside the cemetery.
+

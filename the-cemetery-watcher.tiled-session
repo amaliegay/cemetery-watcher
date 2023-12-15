@@ -1,0 +1,52 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "tiles.tmx",
+    "expandedProjectPaths": [
+        "assets",
+        ".",
+        "assets/Tilesets"
+    ],
+    "fileStates": {
+        "assets/Tilesets/Grass.tsx": {
+            "scaleInDock": 2,
+            "scaleInEditor": 1
+        },
+        "assets/Tilesets/Tilled Dirt.tsx": {
+            "scaleInDock": 1.5,
+            "scaleInEditor": 1
+        },
+        "tiles.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 102,
+                "y": 162.33333333333331
+            }
+        }
+    },
+    "last.externalTilesetPath": "D:/it/cemetery-watcher/assets/Tilesets",
+    "last.imagePath": "D:/it/cemetery-watcher/assets/Tilesets",
+    "map.height": 12,
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 48,
+    "map.tileWidth": 48,
+    "map.width": 14,
+    "openFiles": [
+        "tiles.tmx"
+    ],
+    "project": "the-cemetery-watcher.tiled-project",
+    "recentFiles": [
+        "tiles.tmx",
+        "assets/Tilesets/Tilled Dirt.tsx",
+        "assets/Tilesets/Grass.tsx"
+    ],
+    "tileset.lastUsedFilter": "Tiled 图块集文件 (*.tsx *.xml)",
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}
