@@ -26,13 +26,37 @@ class Player(pygame.sprite.Sprite):
         self.speed = 200
 
         # timers
-        self.timers = {"tool use": Timer(duration=350, callback=self.use_tool)}
+        self.timers = {
+            "tool_use": Timer(duration=200, callback=self.use_tool),
+            "tool_switch": Timer(duration=200)
+            "spell_switch": Timer(duration=200)
+        }
 
-        # equipments
-        self.equipped_tool = "hoe"
+        # inventory
+        self.inventory = ["axe", "hoe", "water"]
+        self.readied_tool_index = 0
+        self.readied_tool = self.inventory[self.readied_tool_index]
+
+        # spells
+        self.spells = ["corn", "tomato"]
+        self.readied_spell_index = 0
+        self.readied_spell = self.spells[self.readied_spell_index]
+        
 
     def use_tool(self):
         print("use_tool")
+
+    def change_tool(self):
+        self.timers["tool_switch"].start()
+        self.readied_tool_index += 1
+        self.readied_tool_index = self.readied_tool_index if self.readied_tool_index < len(self.inventory) else 0
+        self.readied_tool = self.inventory[self.readied_tool_index]
+
+    def change_spell(self):
+        self.timers["spell_switch"].start()
+        self.readied_spell_index += 1
+        self.readied_spell_index = self.readied_spell_index if self.readied_spell_index < len(self.spells) else 0
+        self.readied_spell = self.spells[self.readied_spell_index]
 
     def import_assets(self):
         print("import_assets")
@@ -41,22 +65,7 @@ class Player(pygame.sprite.Sprite):
         for animation in animations.keys():
             surface_list = []
             for frame in animations[animation]:
-                full_path = "assets/Characters/" + frame["image"]
-
-                sprite_sheet = pygame.image.load(full_path).convert_alpha()
-                surface = pygame.Surface(
-                    (frame["size"]["width"], frame["size"]["height"]),
-                    pygame.SRCALPHA,
-                    32,
-                )
-                selected = pygame.Rect(
-                    frame["starting_position"]["x"],
-                    frame["starting_position"]["y"],
-                    frame["size"]["width"],
-                    frame["size"]["height"],
-                )
-                surface.blit(sprite_sheet, (0, 0), selected)
-                surface_list.append(pygame.transform.scale_by(surface, SCALE))
+                surface_list.append(import_asset("assets/Characters/", frame))
 
             self.animations[animation] = surface_list
 
@@ -69,7 +78,7 @@ class Player(pygame.sprite.Sprite):
     def input(self):
         keys = pygame.key.get_pressed()
 
-        if not self.timers["tool use"].active:
+        if not self.timers["tool_use"].active:
             # directions
             if keys[pygame.K_UP]:
                 print("keyDown (scanCode = keyUp)")
@@ -109,9 +118,10 @@ class Player(pygame.sprite.Sprite):
             else:
                 self.direction.x = 0
 
-            # equip
-            if keys[pygame.K_TAB]:
-                self.timers["tool use"].start()
+            # use tool
+            mouse_click, _, _ = pygame.mouse.get_pressed()
+            if mouse_click:
+                self.timers["tool_use"].start()
                 self.direction = pygame.math.Vector2()
                 self.frame_index = 0
 
@@ -121,8 +131,8 @@ class Player(pygame.sprite.Sprite):
             self.status = self.status.split("_")[0] + "_idle"
 
         # tool use
-        if self.timers["tool use"].active:
-            self.status = self.status.split("_")[0] + "_" + self.equipped_tool
+        if self.timers["tool_use"].active:
+            self.status = self.status.split("_")[0] + "_" + self.readied_tool
 
     def move(self, deltaTime):
         # normalize the direction vector

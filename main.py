@@ -5,6 +5,7 @@ import pygame
 
 from settings import *
 from level import Level
+from event_handler import *
 
 
 class Game:
@@ -26,6 +27,8 @@ class Game:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+
+                event_handler(event, self.level)
 
             deltaTime = self.clock.tick(FPS) / 1000
             self.level.simulate(deltaTime)

@@ -6,6 +6,11 @@ WIDTH, HEIGHT = 1280, 720
 SCREEN_SIZE = [WIDTH, HEIGHT]
 SCALE = 4
 
+# overlay
+OVERLAY_POSITION = {
+    "tool": (40, HEIGHT - 15)
+}
+
 FPS = 60
 
 # store the color
