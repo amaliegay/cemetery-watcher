@@ -1,6 +1,6 @@
 overlay_path = " ../assets/Objects/"
 
-spells = { 
+spells = {
     "corn": {
         "image": "Basic Plants.png",
         "starting_position": {"x": 80, "y": 0},
@@ -10,5 +10,5 @@ spells = {
         "image": "Basic Plants.png",
         "starting_position": {"x": 80, "y": 16},
         "size": {"width": 16, "height": 16},
-    }
+    },
 }

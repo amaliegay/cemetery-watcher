@@ -34,6 +34,7 @@ class Level:
 
         self.overlay.display()
 
+
 class CameraGroup(pygame.sprite.Group):
     def __init__(self):
         super().__init__()
@@ -41,7 +42,10 @@ class CameraGroup(pygame.sprite.Group):
         self.offset = pygame.math.Vector2()
 
     def custom_draw(self, player):
-        self.offset.x, self.offset.y = player.rect.centerx - WIDTH / 2, player.rect.centery - HEIGHT / 2
+        self.offset.x, self.offset.y = (
+            player.rect.centerx - WIDTH / 2,
+            player.rect.centery - HEIGHT / 2,
+        )
         for layer in LAYERS.values():
             for sprite in self.sprites():
                 if sprite.z == layer:

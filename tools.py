@@ -1,6 +1,6 @@
 overlay_path = " ../assets/Objects/"
 
-tools = { 
+tools = {
     "axe": {
         "image": "Basic tools and meterials.png",
         "starting_position": {"x": 16, "y": 0},
@@ -15,5 +15,5 @@ tools = {
         "image": "Basic tools and meterials.png",
         "starting_position": {"x": 0, "y": 0},
         "size": {"width": 16, "height": 16},
-    }
+    },
 }

@@ -5,9 +5,9 @@ from tools import *
 from spells import *
 from utils import *
 
+
 class Overlay:
     def __init__(self, player):
-
         # general setup
         self.display_surface = pygame.display.get_surface()
         self.player = player
@@ -15,11 +15,15 @@ class Overlay:
         # imports
         self.tools_surface = []
         for tool_id in tools.keys():
-            self.tools_surface[tool_id] = import_asset("assets/Objects/", tools[tool_id])
+            self.tools_surface[tool_id] = import_asset(
+                "assets/Objects/", tools[tool_id]
+            )
 
         self.spells_surface = []
         for spell_id in spells.keys():
-            self.spells_surface[spell_id] = import_asset("assets/Objects/", spells[spell_id])
+            self.spells_surface[spell_id] = import_asset(
+                "assets/Objects/", spells[spell_id]
+            )
 
     def display(self):
         # tools

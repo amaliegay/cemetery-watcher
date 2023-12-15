@@ -1,5 +1,8 @@
 import pygame
 
+from settings import *
+
+
 def import_asset(path, object):
     full_path = path + object["image"]
 
