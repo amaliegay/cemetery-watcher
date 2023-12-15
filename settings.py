@@ -9,6 +9,7 @@ SCALE = 4
 # overlay
 OVERLAY_POSITION = {
     "tool": (40, HEIGHT - 15)
+    "spell": (70, HEIGHT - 5)
 }
 
 FPS = 60
@@ -17,4 +18,4 @@ FPS = 60
 WHITE = (255, 255, 255)
 
 # layers
-LAYERS = {"soil": 0, "ground plant": 1, "main": 2}
+LAYERS = {"ground": 0, "soil": 1, "ground plant": 2, "main": 3}

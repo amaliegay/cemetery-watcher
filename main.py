@@ -16,7 +16,7 @@ class Game:
         self.screen = pygame.display.set_mode(SCREEN_SIZE)
 
         # set caption of screen
-        pygame.display.set_caption("Cemetery Watcher")
+        pygame.display.set_caption("The Cemetery Watcher")
 
         self.clock = pygame.time.Clock()
         self.level = Level()
