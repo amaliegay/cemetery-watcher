@@ -6,7 +6,7 @@ from settings import *
 from player import Player
 from overlay import Overlay
 from sprites import Generic
-
+from pytmx.util_pygame import load_pygame
 
 class Level:
     def __init__(self):
@@ -22,7 +22,10 @@ class Level:
         self.overlay = Overlay(self.player)
 
     def setup(self):
-        # Generic(position=(0,0), surface=pygame.image.load("../assets/world/ground.png").convert_alpha(), groups=self.all_sprites, z=LAYERS["ground"])
+        tmx_data = load_pygame("../data/map.tmx")
+        
+        for x, y, surface in tmx_data.get_layer_by_name("Tombstone").tiles
+            Generic(position=(x * TILE_SIZE, y * TILE_SIZE), surface=surface, groups=self.all_sprites, z=LAYERS["tombstones"])
 
         self.player = Player((640, 360), self.all_sprites)
 
