@@ -13,7 +13,8 @@ class Game:
         pygame.init()
 
         # setting the size of the window
-        self.screen = pygame.display.set_mode(SCREEN_SIZE)
+        flags = pygame.SCALED
+        self.screen = pygame.display.set_mode(SCREEN_SIZE, flags)
 
         # set caption of screen
         pygame.display.set_caption("The Cemetery Watcher")

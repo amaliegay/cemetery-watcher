@@ -2,9 +2,8 @@ from pygame.math import Vector2
 
 # screen size [width, height]
 TILE_SIZE = 16
-WIDTH, HEIGHT = 1280, 720
+WIDTH, HEIGHT = 640, 480
 SCREEN_SIZE = [WIDTH, HEIGHT]
-SCALE = 4
 
 # overlay
 OVERLAY_POSITION = {"tool": (40, HEIGHT - 15), "spell": (70, HEIGHT - 5)}

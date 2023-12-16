@@ -19,4 +19,4 @@ def import_asset(path, object):
         object["size"]["height"],
     )
     surface.blit(sprite_sheet, (0, 0), selected)
-    return pygame.transform.scale_by(surface, SCALE)
+    return surface

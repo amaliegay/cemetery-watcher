@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="15" height="12" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="1">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="15" height="12" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="1">
  <tileset firstgid="1" source="E:/it/cemetery-watcher/assets/Tilesets/ground-cemetery-1.tsx"/>
- <layer id="4" name="图块层 1" width="15" height="12">
+ <tileset firstgid="2" source="../assets/Objects/Basic Grass Biom things 1.tsx"/>
+ <tileset firstgid="47" source="../assets/Tilesets/Fences.tsx"/>
+ <layer id="4" name="References" width="15" height="12" visible="0">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -15,6 +17,38 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="5" name="Tombstones" width="15" height="12">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,19,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,19,0,0,0,18,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,43,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="6" name="Fences" width="15" height="12">
+  <data encoding="csv">
+47,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+51,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+51,0,0,0,0,0,0,0,0,0,0,0,0,0,47,
+51,0,0,0,0,0,0,0,0,0,0,0,0,0,51,
+51,0,0,0,0,0,0,0,0,0,0,0,0,0,51,
+55,0,0,0,0,0,0,0,0,0,0,0,0,0,51,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,51,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,51,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,51,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,51,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,55,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
 </map>
