@@ -22,7 +22,7 @@ class Level:
         self.overlay = Overlay(self.player)
 
     def setup(self):
-        tmx_data = load_pygame("../data/map.tmx")
+        tmx_data = load_pygame("Data Files/map.tmx")
 
         layers_dict = {"tombstones": ["Tombstones"], "main": ["Fences"]}
         for layers_id in layers_dict.keys():
