@@ -23,10 +23,13 @@ class Level:
 
     def setup(self):
         tmx_data = load_pygame("../data/map.tmx")
-        
-        for x, y, surface in tmx_data.get_layer_by_name("Tombstone").tiles
-            Generic(position=(x * TILE_SIZE, y * TILE_SIZE), surface=surface, groups=self.all_sprites, z=LAYERS["tombstones"])
 
+        layers_dict = {"tombstones": ["Tombstones"], "main": ["Fences"]}
+        for layers_id in layers_dict.keys():
+            for layer in layers_dict[layers_id]:
+                for x, y, surface in tmx_data.get_layer_by_name(layer).tiles():
+                    Generic(position=(x * TILE_SIZE, y * TILE_SIZE), surface=surface, groups=self.all_sprites, z=LAYERS[layers_id])
+        
         self.player = Player((640, 360), self.all_sprites)
 
     def simulate(self, deltaTime):
