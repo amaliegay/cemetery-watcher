@@ -15,4 +15,4 @@ FPS = 60
 WHITE = (255, 255, 255)
 
 # layers
-LAYERS = {"ground": 0, "soil": 1, "ground plant": 2, "main": 3}
+LAYERS = {"ground": 0, "soil": 1, "ground plant": 2, "tombstones": 3, "main": 4}
