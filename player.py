@@ -53,10 +53,16 @@ class Player(pygame.sprite.Sprite):
         # interaction
         self.zombie_sprites = zombie_sprites
 
+    def get_target_position(self):
+        self.target_position = (
+            self.rect.center + PLAYER_TOOL_OFFSET[self.status.split("_")[0]]
+        )
+
     def use_tool(self):
         if self.readied_tool == "axe":
             for zombie in self.zombie_sprites.sprites():
-                pass
+                if zombie.rect.collidepoint(self.target_position):
+                    zombie.damage()
         if self.readied_tool == "hoe":
             pass
         if self.readied_tool == "water":
@@ -201,5 +207,6 @@ class Player(pygame.sprite.Sprite):
         self.input()
         self.get_status()
         self.update_timer()
+        self.get_target_position()
         self.move(deltaTime)
         self.animate(deltaTime)

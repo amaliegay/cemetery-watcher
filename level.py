@@ -105,3 +105,19 @@ class CameraGroup(pygame.sprite.Group):
                     offset_rect = sprite.rect.copy()
                     offset_rect.center -= self.offset
                     self.display_surface.blit(sprite.image, offset_rect)
+
+                    # debug
+                    if sprite == player:
+                        # pygame.draw.rect(self.display_surface, "green", offset_rect, 4)
+                        bounding_box_rect = player.bounding_box.copy()
+                        bounding_box_rect.center = offset_rect.center
+                        pygame.draw.rect(
+                            self.display_surface, "green", bounding_box_rect, 1
+                        )
+                        target_position = (
+                            offset_rect.center
+                            + PLAYER_TOOL_OFFSET[player.status.split("_")[0]]
+                        )
+                        pygame.draw.circle(
+                            self.display_surface, "red", target_position, 4
+                        )
