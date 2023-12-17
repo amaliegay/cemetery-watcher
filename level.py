@@ -5,7 +5,7 @@ import pygame
 from settings import *
 from player import Player
 from overlay import Overlay
-from sprites import Generic, Wildflower
+from sprites import Generic, Wildflower, Tree
 from pytmx.util_pygame import load_pygame
 
 
@@ -18,6 +18,7 @@ class Level:
 
         # sprite groups
         self.all_sprites = CameraGroup()
+        self.collision_sprites = pygame.sprite.Group()
 
         self.setup()
         self.overlay = Overlay(self.player)
@@ -32,7 +33,7 @@ class Level:
                     Generic(
                         position=(x * TILE_SIZE, y * TILE_SIZE),
                         surface=surface,
-                        groups=self.all_sprites,
+                        groups=[self.all_sprites, self.collision_sprites],
                         z=LAYERS[layers_id],
                     )
 
@@ -40,17 +41,30 @@ class Level:
             Wildflower(
                 position=(x * TILE_SIZE, y * TILE_SIZE),
                 surface=surface,
-                groups=self.all_sprites,
+                groups=[self.all_sprites, self.collision_sprites],
             )
 
         for x, y, surface in tmx_data.get_layer_by_name("Trees").tiles():
-            Wildflower(
+            Tree(
                 position=(x * TILE_SIZE, y * TILE_SIZE),
                 surface=surface,
-                groups=self.all_sprites,
+                groups=[self.all_sprites, self.collision_sprites],
             )
 
-        self.player = Player((WIDTH / 2, HEIGHT / 2), self.all_sprites)
+        # collision tiles
+        for x, y, surface in tmx_data.get_layer_by_name("Collision").tiles():
+            Generic(
+                (x * TILE_SIZE, y * TILE_SIZE),
+                pygame.Surface((TILE_SIZE, TILE_SIZE)),
+                self.collision_sprites,
+            )
+
+        # player
+        for obj in tmx_data.get_layer_by_name("Player"):
+            if obj.name == "Spawn":
+                self.player = Player(
+                    (obj.x, obj.y), self.all_sprites, self.collision_sprites
+                )
 
     def simulate(self, deltaTime):
         # print("Level.simulate (deltaTime = " + str(deltaTime) + ")")

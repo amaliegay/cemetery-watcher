@@ -16,8 +16,10 @@ class Game:
         flags = pygame.SCALED
         self.screen = pygame.display.set_mode(SCREEN_SIZE, flags)
 
-        # set caption of screen
+        # title and icon
         pygame.display.set_caption("The Cemetery Watcher")
+        icon = pygame.image.load("The Cemetery Watcher.png")
+        pygame.display.set_icon(icon)
 
         self.clock = pygame.time.Clock()
         self.level = Level()

@@ -9,7 +9,7 @@ from timer import Timer
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, position, group):
+    def __init__(self, position, group, collision_sprites):
         super().__init__(group)
 
         self.import_assets()
@@ -25,6 +25,13 @@ class Player(pygame.sprite.Sprite):
         self.direction = pygame.math.Vector2()
         self.position = pygame.math.Vector2(self.rect.center)
         self.speed = 100
+
+        # collision
+        self.collision_sprites = collision_sprites
+        self.bounding_box = self.rect.copy().inflate((-36, -32))
+        print(
+            f"Player: rect = ({self.rect.width}, {self.rect.height}), bounding_box = ({self.bounding_box.width}, {self.bounding_box.height})"
+        )
 
         # timers
         self.timers = {
@@ -140,6 +147,26 @@ class Player(pygame.sprite.Sprite):
         if self.timers["tool_use"].active:
             self.status = self.status.split("_")[0] + "_" + self.readied_tool
 
+    def collision(self, direction):
+        for sprite in self.collision_sprites.sprites():
+            if hasattr(sprite, "bounding_box"):
+                if sprite.bounding_box.colliderect(self.bounding_box):
+                    if direction == "horizontal":
+                        if self.direction.x > 0:
+                            self.bounding_box.right = sprite.bounding_box.left
+                        if self.direction.x < 0:
+                            self.bounding_box.left = sprite.bounding_box.right
+                        self.rect.centerx = self.bounding_box.centerx
+                        self.position.x = self.bounding_box.centerx
+
+                    if direction == "vertical":
+                        if self.direction.y > 0:
+                            self.bounding_box.bottom = sprite.bounding_box.top
+                        if self.direction.y < 0:
+                            self.bounding_box.top = sprite.bounding_box.bottom
+                        self.rect.centery = self.bounding_box.centery
+                        self.position.y = self.bounding_box.centery
+
     def move(self, deltaTime):
         # normalize the direction vector
         if self.direction.magnitude() > 0:
@@ -147,11 +174,15 @@ class Player(pygame.sprite.Sprite):
 
         # horizontal movement
         self.position.x += self.speed * self.direction.x * deltaTime
-        self.rect.centerx = self.position.x
+        self.bounding_box.centerx = round(self.position.x)
+        self.rect.centerx = self.bounding_box.centerx
+        self.collision("horizontal")
 
         # vertical movement
         self.position.y += self.speed * self.direction.y * deltaTime
-        self.rect.centery = self.position.y
+        self.bounding_box.centery = round(self.position.y)
+        self.rect.centery = self.bounding_box.centery
+        self.collision("vertical")
 
     def update_timer(self):
         for timer in self.timers.values():
