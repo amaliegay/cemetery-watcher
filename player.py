@@ -9,7 +9,7 @@ from timer import Timer
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, position, group, collision_sprites, zombie_sprites):
+    def __init__(self, position, group, collision_sprites, zombie_sprites, interaction):
         super().__init__(group)
 
         self.import_assets()
@@ -52,6 +52,7 @@ class Player(pygame.sprite.Sprite):
 
         # interaction
         self.zombie_sprites = zombie_sprites
+        self.interaction = interaction
 
     def get_target_position(self):
         self.target_position = (
@@ -145,6 +146,16 @@ class Player(pygame.sprite.Sprite):
                 self.status = "right"
             else:
                 self.direction.x = 0
+
+            if keys[pygame.K_SPACE]:
+                print("keyDown (scanCode = space)")
+                collided_interaction_sprite = pygame.sprite.spritecollide(
+                    self, self.interaction, False
+                )
+                print(collided_interaction_sprite)
+                if collided_interaction_sprite:
+                    if collided_interaction_sprite[0].name == "Gate":
+                        print("activate Gate")
 
             # use tool
             mouse_click, _, _ = pygame.mouse.get_pressed()

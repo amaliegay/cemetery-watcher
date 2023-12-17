@@ -18,6 +18,13 @@ class Generic(pygame.sprite.Sprite):
         )
 
 
+class Interaction(Generic):
+    def __init__(self, position, size, groups, name):
+        surface = pygame.Surface(size)
+        super().__init__(position, surface, groups)
+        self.name = name
+
+
 class Wildflower(Generic):
     def __init__(self, position, surface, groups):
         super().__init__(position, surface, groups)

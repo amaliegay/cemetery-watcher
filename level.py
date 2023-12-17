@@ -5,7 +5,7 @@ import pygame
 from settings import *
 from player import Player
 from overlay import Overlay
-from sprites import Generic, Wildflower, Tree, Zombie
+from sprites import Generic, Wildflower, Tree, Zombie, Interaction
 from pytmx.util_pygame import load_pygame
 
 
@@ -20,6 +20,7 @@ class Level:
         self.all_sprites = CameraGroup()
         self.collision_sprites = pygame.sprite.Group()
         self.zombie_sprites = pygame.sprite.Group()
+        self.interaction_sprites = pygame.sprite.Group()
 
         self.setup()
         self.overlay = Overlay(self.player)
@@ -75,7 +76,18 @@ class Level:
                     self.all_sprites,
                     self.collision_sprites,
                     self.zombie_sprites,
+                    self.interaction_sprites,
                 )
+            if obj.name == "Gate":
+                Interaction(
+                    (obj.x, obj.y),
+                    (obj.width, obj.height),
+                    self.interaction_sprites,
+                    obj.name,
+                )
+
+    def add_item(self, item):
+        self.player.inventory.append(item)
 
     def simulate(self, deltaTime):
         # print("Level.simulate (deltaTime = " + str(deltaTime) + ")")
