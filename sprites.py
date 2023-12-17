@@ -8,3 +8,13 @@ class Generic(pygame.sprite.Sprite):
         self.image = surface
         self.rect = self.image.get_rect(topleft=position)
         self.z = z
+
+
+class Wildflower(Generic):
+    def __init__(self, position, surface, groups):
+        super().__init__(position, surface, groups)
+
+
+class Tree(Generic):
+    def __init__(self, position, surface, groups, name):
+        super().__init__(position, surface, groups)

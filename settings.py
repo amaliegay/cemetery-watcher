@@ -2,7 +2,7 @@ from pygame.math import Vector2
 
 # screen size [width, height]
 TILE_SIZE = 16
-WIDTH, HEIGHT = 640, 480
+WIDTH, HEIGHT = 240, 192
 SCREEN_SIZE = [WIDTH, HEIGHT]
 
 # overlay
@@ -14,4 +14,4 @@ FPS = 60
 WHITE = (255, 255, 255)
 
 # layers
-LAYERS = {"ground": 0, "soil": 1, "ground plant": 2, "tombstones": 3, "main": 4}
+LAYERS = {"ground": 0, "soil": 1, "ground plant": 2, "main": 3}

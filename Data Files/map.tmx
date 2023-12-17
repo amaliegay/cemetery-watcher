@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="15" height="12" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="1">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="15" height="12" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="1">
  <tileset firstgid="1" source="E:/it/cemetery-watcher/assets/Tilesets/ground-cemetery-1.tsx"/>
  <tileset firstgid="2" source="../assets/Objects/Basic Grass Biom things 1.tsx"/>
  <tileset firstgid="47" source="../assets/Tilesets/Fences.tsx"/>
- <layer id="4" name="References" width="15" height="12" visible="0">
+ <tileset firstgid="63" source="../references/cemetery-01.tsx"/>
+ <layer id="4" name="Reference1" width="15" height="12">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -17,6 +18,22 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="7" name="Reference2" width="15" height="12" visible="0">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+63,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
  <layer id="5" name="Tombstones" width="15" height="12">
@@ -49,6 +66,38 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,51,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,55,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="10" name="Decoration" width="15" height="12">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,36,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="11" name="Trees" width="15" height="12">
+  <data encoding="csv">
+3,4,0,0,0,0,0,0,0,0,0,0,0,0,0,
+12,13,0,0,0,0,0,0,0,0,0,0,0,0,0,
+3,4,0,0,0,0,0,0,0,0,0,0,0,0,0,
+12,13,0,0,0,0,0,0,0,0,0,0,0,0,0,
+3,4,0,0,0,0,0,0,0,0,0,0,0,0,0,
+12,13,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,3,4,0,
+0,0,0,0,0,0,0,0,0,0,0,0,12,13,0,
+0,0,0,0,0,0,0,0,0,0,0,0,3,4,0,
+0,0,0,0,0,0,0,0,0,0,0,0,12,13,0,
+0,0,0,0,0,0,0,0,0,0,0,0,3,4,0,
+0,0,0,0,0,0,0,0,0,0,0,0,12,13,0
 </data>
  </layer>
 </map>

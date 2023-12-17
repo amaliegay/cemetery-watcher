@@ -5,7 +5,7 @@ import pygame
 from settings import *
 from player import Player
 from overlay import Overlay
-from sprites import Generic
+from sprites import Generic, Wildflower
 from pytmx.util_pygame import load_pygame
 
 
@@ -25,9 +25,9 @@ class Level:
     def setup(self):
         tmx_data = load_pygame("Data Files/map.tmx")
 
-        layers_dict = {"tombstones": ["Tombstones"], "main": ["Fences"]}
-        for layers_id in layers_dict.keys():
-            for layer in layers_dict[layers_id]:
+        generic_layers = {"main": ["Tombstones", "Fences"]}
+        for layers_id in generic_layers.keys():
+            for layer in generic_layers[layers_id]:
                 for x, y, surface in tmx_data.get_layer_by_name(layer).tiles():
                     Generic(
                         position=(x * TILE_SIZE, y * TILE_SIZE),
@@ -36,10 +36,24 @@ class Level:
                         z=LAYERS[layers_id],
                     )
 
-        self.player = Player((640, 360), self.all_sprites)
+        for x, y, surface in tmx_data.get_layer_by_name("Decoration").tiles():
+            Wildflower(
+                position=(x * TILE_SIZE, y * TILE_SIZE),
+                surface=surface,
+                groups=self.all_sprites,
+            )
+
+        for x, y, surface in tmx_data.get_layer_by_name("Trees").tiles():
+            Wildflower(
+                position=(x * TILE_SIZE, y * TILE_SIZE),
+                surface=surface,
+                groups=self.all_sprites,
+            )
+
+        self.player = Player((WIDTH / 2, HEIGHT / 2), self.all_sprites)
 
     def simulate(self, deltaTime):
-        print("Level.simulate (deltaTime = " + str(deltaTime) + ")")
+        # print("Level.simulate (deltaTime = " + str(deltaTime) + ")")
         self.display_surface.fill("black")
         self.all_sprites.custom_draw(self.player)
         self.all_sprites.update(deltaTime)
@@ -59,7 +73,9 @@ class CameraGroup(pygame.sprite.Group):
             player.rect.centery - HEIGHT / 2,
         )
         for layer in LAYERS.values():
-            for sprite in self.sprites():
+            for sprite in sorted(
+                self.sprites(), key=lambda sprite: sprite.rect.centery
+            ):
                 if sprite.z == layer:
                     offset_rect = sprite.rect.copy()
                     offset_rect.center -= self.offset
