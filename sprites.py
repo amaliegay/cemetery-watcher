@@ -34,3 +34,22 @@ class Tree(Generic):
         print(
             f"Tree: rect = ({self.rect.width}, {self.rect.height}), bounding_box = ({self.bounding_box.width}, {self.bounding_box.height})"
         )
+
+
+class Zombie(Generic):
+    def __init__(self, position, surface, groups):
+        super().__init__(position, surface, groups)
+        self.bounding_box = self.rect.copy().inflate(
+            -self.rect.width * 0.9, -self.rect.height * 0.5
+        )
+        print(
+            f"Tree: rect = ({self.rect.width}, {self.rect.height}), bounding_box = ({self.bounding_box.width}, {self.bounding_box.height})"
+        )
+
+        # zombie attributes
+        self.health = 5
+        self.isDead = False
+
+    def damage(self):
+        # damage the zombie
+        self.health -= 1

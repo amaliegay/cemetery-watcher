@@ -5,7 +5,7 @@ import pygame
 from settings import *
 from player import Player
 from overlay import Overlay
-from sprites import Generic, Wildflower, Tree
+from sprites import Generic, Wildflower, Tree, Zombie
 from pytmx.util_pygame import load_pygame
 
 
@@ -19,6 +19,7 @@ class Level:
         # sprite groups
         self.all_sprites = CameraGroup()
         self.collision_sprites = pygame.sprite.Group()
+        self.zombie_sprites = pygame.sprite.Group()
 
         self.setup()
         self.overlay = Overlay(self.player)
@@ -51,6 +52,13 @@ class Level:
                 groups=[self.all_sprites, self.collision_sprites],
             )
 
+        for x, y, surface in tmx_data.get_layer_by_name("Zombies").tiles():
+            Zombie(
+                position=(x * TILE_SIZE, y * TILE_SIZE),
+                surface=surface,
+                groups=[self.all_sprites, self.collision_sprites, self.zombie_sprites],
+            )
+
         # collision tiles
         for x, y, surface in tmx_data.get_layer_by_name("Collision").tiles():
             Generic(
@@ -63,7 +71,10 @@ class Level:
         for obj in tmx_data.get_layer_by_name("Player"):
             if obj.name == "Spawn":
                 self.player = Player(
-                    (obj.x, obj.y), self.all_sprites, self.collision_sprites
+                    (obj.x, obj.y),
+                    self.all_sprites,
+                    self.collision_sprites,
+                    self.zombie_sprites,
                 )
 
     def simulate(self, deltaTime):

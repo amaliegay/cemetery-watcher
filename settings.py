@@ -6,7 +6,7 @@ WIDTH, HEIGHT = 240, 192
 SCREEN_SIZE = [WIDTH, HEIGHT]
 
 # overlay
-OVERLAY_POSITION = {"tool": (40, HEIGHT - 15), "spell": (70, HEIGHT - 5)}
+OVERLAY_POSITION = {"tool": (16, HEIGHT - 8), "spell": (32, HEIGHT - 8)}
 
 FPS = 60
 

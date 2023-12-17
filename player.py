@@ -9,7 +9,7 @@ from timer import Timer
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, position, group, collision_sprites):
+    def __init__(self, position, group, collision_sprites, zombie_sprites):
         super().__init__(group)
 
         self.import_assets()
@@ -50,8 +50,17 @@ class Player(pygame.sprite.Sprite):
         self.readied_spell_index = 0
         self.readied_spell = self.spells[self.readied_spell_index]
 
+        # interaction
+        self.zombie_sprites = zombie_sprites
+
     def use_tool(self):
-        print("use_tool")
+        if self.readied_tool == "axe":
+            for zombie in self.zombie_sprites.sprites():
+                pass
+        if self.readied_tool == "hoe":
+            pass
+        if self.readied_tool == "water":
+            pass
 
     def change_tool(self, direction):
         self.timers["tool_switch"].start()
