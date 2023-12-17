@@ -21,4 +21,4 @@ PLAYER_TOOL_OFFSET = {
 WHITE = (255, 255, 255)
 
 # layers
-LAYERS = {"ground": 0, "soil": 1, "ground plant": 2, "main": 3, "zombies": 4}
+LAYERS = {"ground": 0, "soil": 1, "ground plant": 2, "main": 3}

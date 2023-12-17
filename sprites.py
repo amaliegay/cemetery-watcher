@@ -28,7 +28,7 @@ class Wildflower(Generic):
 
 
 class Particle(Generic):
-    def __init__(self, position, surface, groups, z, duration=200):
+    def __init__(self, position, surface, groups, z, duration=100):
         super().__init__(position, surface, groups, z)
         self.start_time = pygame.time.get_ticks()
         self.duration = duration
@@ -74,7 +74,7 @@ class Zombie(Generic):
         # damage the zombie
         print("damage zombie")
         self.health -= 1
-        Particle((self.rect.topleft), self.image, self.groups()[0], LAYERS["zombies"])
+        Particle((self.rect.topleft), self.image, self.groups()[0], LAYERS["main"])
 
     def check_death(self):
         if self.health <= 0:
